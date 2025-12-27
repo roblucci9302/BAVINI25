@@ -60,6 +60,117 @@ export const PROJECT_TEMPLATES: ProjectTemplate[] = [
     color: 'bg-yellow-500/10 hover:bg-yellow-500/20 border-yellow-500/30',
     prompt: 'Crée une API REST avec Express et TypeScript. Inclure un endpoint /health, la structure MVC, et des tests avec Vitest et Supertest.',
   },
+  // ============================================================================
+  // TEMPLATES SHADCN/UI - Templates avec UI moderne pré-configurée
+  // ============================================================================
+  {
+    id: 'react-shadcn',
+    name: 'React + shadcn/ui',
+    description: 'React + TypeScript + Tailwind + shadcn/ui + Vitest',
+    icon: '🎨',
+    color: 'bg-violet-500/10 hover:bg-violet-500/20 border-violet-500/30',
+    prompt: `Crée une application React moderne avec:
+
+## Stack technique
+- React 18 + TypeScript + Vite
+- Tailwind CSS configuré avec le thème shadcn/ui
+- shadcn/ui components installés (Button, Card, Input, Label)
+- Lucide React pour les icônes
+- Vitest + Testing Library pour les tests
+
+## Structure attendue
+- src/components/ui/ - Composants shadcn/ui (Button, Card, Input, Label)
+- src/components/ - Composants métier
+- src/lib/utils.ts - Fonction cn() pour les classes
+- tailwind.config.js - Configuration avec couleurs shadcn
+- Configuration du path alias "@/" vers src/
+
+## Fichiers de base
+- Un composant App.tsx avec un exemple de Card et Button
+- Les styles CSS de base pour shadcn/ui (variables CSS)
+- Un test pour le composant App
+
+## Important
+- Utiliser les variables CSS de shadcn pour les couleurs (--primary, --background, etc.)
+- Mobile-first responsive design
+- Tous les composants typés avec TypeScript
+- Inclure class-variance-authority, clsx, tailwind-merge`,
+  },
+  {
+    id: 'nextjs-shadcn',
+    name: 'Next.js + shadcn/ui',
+    description: 'Next.js 14 + App Router + shadcn/ui + Tailwind',
+    icon: '▲',
+    color: 'bg-black/10 hover:bg-black/20 border-black/30 dark:bg-white/10 dark:hover:bg-white/20 dark:border-white/30',
+    prompt: `Crée une application Next.js 14 avec:
+
+## Stack technique
+- Next.js 14 avec App Router
+- TypeScript strict
+- Tailwind CSS + shadcn/ui theme
+- shadcn/ui components de base (Button, Card, Input, Label)
+- Lucide React pour les icônes
+- Vitest pour les tests
+
+## Structure attendue
+- app/ - App Router pages
+- components/ui/ - Composants shadcn/ui
+- components/ - Composants métier
+- lib/utils.ts - Fonction cn() pour les classes
+
+## Pages de base
+- app/page.tsx - Page d'accueil avec hero section responsive
+- app/layout.tsx - Layout avec metadata et providers
+- components/ui/button.tsx, card.tsx, input.tsx, label.tsx
+
+## Important
+- Utiliser les Server Components par défaut
+- "use client" uniquement quand nécessaire
+- Metadata configurée pour le SEO
+- Dark mode supporté avec les variables CSS shadcn
+- Mobile-first responsive design`,
+  },
+  {
+    id: 'fullstack-supabase',
+    name: 'Full-Stack Supabase',
+    description: 'React + shadcn/ui + Supabase (Auth, DB, Storage)',
+    icon: '⚡',
+    color: 'bg-emerald-500/10 hover:bg-emerald-500/20 border-emerald-500/30',
+    prompt: `Crée une application full-stack avec Supabase:
+
+## Stack technique
+- React 18 + TypeScript + Vite
+- Tailwind CSS + shadcn/ui (Button, Card, Input, Label, Form)
+- Supabase Client pour Auth et Database
+- React Router pour la navigation
+- React Query pour le data fetching
+- Lucide React pour les icônes
+- Vitest pour les tests
+
+## Fonctionnalités Auth
+- Page de connexion (email/password) avec shadcn/ui Form
+- Page d'inscription avec validation Zod
+- Page mot de passe oublié
+- AuthContext pour l'état utilisateur
+- Protection des routes privées
+
+## Structure
+- src/lib/supabase.ts - Client Supabase configuré
+- src/lib/utils.ts - Fonction cn() pour les classes
+- src/contexts/AuthContext.tsx - Provider Auth
+- src/hooks/useAuth.ts - Hook personnalisé
+- src/pages/auth/ - Pages d'authentification (Login, Register, ForgotPassword)
+- src/pages/dashboard/ - Pages protégées
+- src/components/auth/ProtectedRoute.tsx
+- src/components/ui/ - Composants shadcn/ui
+
+## Important
+- Variables d'environnement pour les clés Supabase (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY)
+- Fichier .env.example avec les variables requises
+- Types TypeScript générés pour Supabase si applicable
+- Mobile-first responsive design
+- Dark mode supporté`,
+  },
 ];
 
 /**
@@ -81,4 +192,34 @@ export function getMainTemplates(): ProjectTemplate[] {
  */
 export function getAdditionalTemplates(): ProjectTemplate[] {
   return PROJECT_TEMPLATES.slice(4);
+}
+
+// ============================================================================
+// FONCTIONS POUR TEMPLATES SHADCN/UI
+// ============================================================================
+
+/**
+ * IDs des templates utilisant shadcn/ui
+ */
+const SHADCN_TEMPLATE_IDS = ['react-shadcn', 'nextjs-shadcn', 'fullstack-supabase'];
+
+/**
+ * Récupère les templates avec shadcn/ui pré-configuré
+ */
+export function getShadcnTemplates(): ProjectTemplate[] {
+  return PROJECT_TEMPLATES.filter((t) => SHADCN_TEMPLATE_IDS.includes(t.id));
+}
+
+/**
+ * Vérifie si un template utilise shadcn/ui
+ */
+export function isShadcnTemplate(templateId: string): boolean {
+  return SHADCN_TEMPLATE_IDS.includes(templateId);
+}
+
+/**
+ * Récupère les templates de base (sans shadcn/ui)
+ */
+export function getBasicTemplates(): ProjectTemplate[] {
+  return PROJECT_TEMPLATES.filter((t) => !SHADCN_TEMPLATE_IDS.includes(t.id));
 }
