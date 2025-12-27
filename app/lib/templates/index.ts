@@ -3,6 +3,9 @@
  * Permet de charger et afficher les templates disponibles pour un démarrage rapide
  */
 
+// Re-export des UI patterns pour un accès centralisé
+export * from './ui-patterns';
+
 export interface ProjectTemplate {
   id: string;
   name: string;

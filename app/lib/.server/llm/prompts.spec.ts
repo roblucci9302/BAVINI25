@@ -29,6 +29,11 @@ describe('System Prompt', () => {
       expect(prompt).toContain('</responsive_rules>');
     });
 
+    it('contient les ui_patterns', () => {
+      expect(prompt).toContain('<ui_patterns>');
+      expect(prompt).toContain('</ui_patterns>');
+    });
+
     it('contient les examples', () => {
       expect(prompt).toContain('<examples>');
       expect(prompt).toContain('</examples>');
@@ -175,6 +180,46 @@ describe('System Prompt', () => {
       expect(prompt).toContain('aspect-video');
       expect(prompt).toContain('object-cover');
       expect(prompt).toContain('loading="lazy"');
+    });
+  });
+
+  describe('UI Patterns prédéfinis', () => {
+    it('contient les 6 patterns', () => {
+      expect(prompt).toContain('DASHBOARD');
+      expect(prompt).toContain('AUTHENTICATION');
+      expect(prompt).toContain('LANDING PAGE');
+      expect(prompt).toContain('CRUD TABLE');
+      expect(prompt).toContain('SETTINGS');
+      expect(prompt).toContain('PROFILE');
+    });
+
+    it('le pattern Dashboard mentionne Sheet et Sidebar', () => {
+      expect(prompt).toContain('Sidebar avec navigation');
+      expect(prompt).toContain('Sheet pour le menu mobile');
+    });
+
+    it('le pattern Auth mentionne react-hook-form et zod', () => {
+      expect(prompt).toContain('react-hook-form + zod');
+    });
+
+    it('le pattern Landing mentionne Hero et Features', () => {
+      expect(prompt).toContain('Hero section');
+      expect(prompt).toContain('Features en grid');
+    });
+
+    it('le pattern CRUD mentionne Dialog et AlertDialog', () => {
+      expect(prompt).toContain('Dialog pour créer/éditer');
+      expect(prompt).toContain('AlertDialog pour confirmer');
+    });
+
+    it('le pattern Settings mentionne Tabs et Switch', () => {
+      expect(prompt).toContain('Tabs horizontaux');
+      expect(prompt).toContain('Switch pour les toggles');
+    });
+
+    it('le pattern Profile mentionne Avatar et Badges', () => {
+      expect(prompt).toContain('avatar large');
+      expect(prompt).toContain('Badges pour rôle');
     });
   });
 
