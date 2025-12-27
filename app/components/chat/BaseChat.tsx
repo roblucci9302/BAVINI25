@@ -11,6 +11,7 @@ import {
   preloadOnFirstMessage,
   preloadOnWorkbenchInteraction,
 } from '~/lib/performance';
+import { trackEvent, AnalyticsEvents } from '~/lib/analytics';
 import { AnimatedPlaceholder } from './AnimatedPlaceholder';
 import { Messages } from './Messages.client';
 import { SendButton } from './SendButton.client';
@@ -86,16 +87,28 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
       preloadOnTypingStart();
     }, []);
 
-    // Wrap sendMessage to trigger preload on first message
+    // Wrap sendMessage to trigger preload on first message and track analytics
     const handleSendMessage = useCallback(
       (event: React.UIEvent, messageInput?: string) => {
+        const messageContent = messageInput || input;
+
+        // First message preloading
         if (!hasPreloadedOnFirstMessage.current) {
           hasPreloadedOnFirstMessage.current = true;
           preloadOnFirstMessage();
+          trackEvent(AnalyticsEvents.CHAT_STARTED);
         }
+
+        // Track message sent
+        trackEvent(AnalyticsEvents.MESSAGE_SENT, {
+          messageLength: messageContent.length,
+          hasAttachments: selectedFiles.length > 0,
+          attachmentCount: selectedFiles.length,
+        });
+
         sendMessage?.(event, messageInput);
       },
-      [sendMessage],
+      [sendMessage, input, selectedFiles.length],
     );
 
     return (
