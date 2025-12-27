@@ -6,6 +6,9 @@
 // Re-export des UI patterns pour un accès centralisé
 export * from './ui-patterns';
 
+// Re-export des composants de base shadcn/ui
+export * from './base-components';
+
 export interface ProjectTemplate {
   id: string;
   name: string;
