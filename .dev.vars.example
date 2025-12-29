@@ -1,6 +1,17 @@
-# BAVINI OAuth Configuration
+# BAVINI Configuration
 # Copy this file to .dev.vars and fill in your credentials
 # DO NOT commit .dev.vars to version control
+
+# =============================================================================
+# REQUIRED: Anthropic API Key (Claude 4.5)
+# =============================================================================
+# Get your API key at: https://console.anthropic.com/settings/keys
+# This is REQUIRED for BAVINI to generate code
+ANTHROPIC_API_KEY=your_anthropic_api_key
+
+# =============================================================================
+# Optional: OAuth Configuration
+# =============================================================================
 
 # GitHub OAuth App
 # Create at: https://github.com/settings/developers
